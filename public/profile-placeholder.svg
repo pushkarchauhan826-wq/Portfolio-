@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="630" viewBox="0 0 600 630" fill="none">
+  <!-- Clean Engineering Blueprint / Slate Background -->
+  <rect width="600" height="630" fill="#0F172A"/>
+  
+  <!-- Subtle Blueprint Grid lines -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1E293B" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="600" height="630" fill="url(#grid)" />
+  
+  <!-- Outer technical framing circle -->
+  <circle cx="300" cy="250" r="140" stroke="#334155" stroke-width="2" stroke-dasharray="6 4"/>
+  <circle cx="300" cy="250" r="120" fill="#1E293B" stroke="#2563EB" stroke-width="2"/>
+  
+  <!-- Stylized initials monogram PK -->
+  <text x="300" y="278" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="76" font-weight="700" fill="#F8FAFC" text-anchor="middle" letter-spacing="4">PK</text>
+  
+  <!-- Technical marker below circle -->
+  <text x="300" y="440" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="700" fill="#F8FAFC" text-anchor="middle" letter-spacing="1">PUSHKAR KUMAR</text>
+  
+  <text x="300" y="475" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="500" fill="#94A3B8" text-anchor="middle" letter-spacing="0.5">B.Tech Mechanical Engineering</text>
+  
+  <text x="300" y="505" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="500" fill="#38BDF8" text-anchor="middle" letter-spacing="1">JECRC UNIVERSITY, JAIPUR</text>
+  
+  <!-- Instruction tag -->
+  <rect x="170" y="540" width="260" height="32" rx="6" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="300" y="561" font-family="'Courier New', Courier, monospace" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">REPLACE WITH YOUR PHOTO</text>
+</svg>

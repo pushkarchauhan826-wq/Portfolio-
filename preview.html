@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pushkar Kumar | B.Tech Mechanical Engineering | JECRC University</title>
+  <link rel="icon" type="image/svg+xml" href="./public/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --bg-accent-subtle: #eff6ff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border-subtle: #e2e8f0;
+      --border-medium: #cbd5e1;
+      --accent-primary: #1e3a8a;
+      --accent-blue: #2563eb;
+      --accent-light: #dbeafe;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --max-width: 1160px;
+      --navbar-height: 72px;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.07);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+        linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+      background-size: 32px 32px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { width: 100%; max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .section { padding: 64px 0; }
+    .section-sm { padding: 40px 0; }
+    .tech-tag {
+      display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono);
+      font-size: 0.75rem; font-weight: 500; text-transform: uppercase; color: var(--accent-primary);
+      background: var(--bg-accent-subtle); border: 1px solid var(--accent-light);
+      padding: 4px 10px; border-radius: var(--radius-sm); letter-spacing: 0.05em;
+    }
+    .tech-tag::before { content: ''; width: 6px; height: 6px; background-color: var(--accent-blue); border-radius: 50%; }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono);
+      font-size: 0.75rem; padding: 3px 8px; border-radius: var(--radius-sm);
+      background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border-subtle);
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 0.9375rem; font-weight: 500; padding: 12px 22px; border-radius: var(--radius-sm);
+      border: 1px solid transparent; cursor: pointer; text-decoration: none; transition: all 0.2s ease;
+    }
+    .btn-primary { background-color: var(--text-primary); color: #fff; }
+    .btn-primary:hover { background-color: var(--accent-primary); transform: translateY(-1px); }
+    .btn-secondary { background-color: #fff; color: var(--text-primary); border-color: var(--border-medium); }
+    .btn-secondary:hover { background-color: var(--bg-subtle); color: var(--accent-primary); }
+    .card-base {
+      background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+      padding: 24px; box-shadow: var(--shadow-sm); transition: all 0.25s ease;
+    }
+    .card-base:hover { border-color: var(--border-medium); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+    /* Sticky Navbar */
+    .navbar {
+      position: sticky; top: 0; height: var(--navbar-height); background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); z-index: 100;
+      display: flex; align-items: center;
+    }
+    .navbar-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; color: var(--text-primary); cursor: pointer; }
+    .brand-gear { width: 32px; height: 32px; background: var(--text-primary); color: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+    .brand-badge { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--accent-blue); background: var(--bg-accent-subtle); padding: 2px 6px; border-radius: 4px; }
+    .nav-links { display: flex; gap: 4px; list-style: none; flex-wrap: nowrap; }
+    .nav-btn {
+      background: none; border: none; font-size: 0.84375rem; font-weight: 500; color: var(--text-secondary);
+      padding: 6px 12px; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s ease; white-space: nowrap;
+    }
+    .nav-btn:hover { color: var(--text-primary); background: var(--bg-subtle); }
+    .nav-btn.active { color: var(--accent-primary); background: var(--bg-accent-subtle); font-weight: 600; }
+    .mobile-menu-btn { display: none; background: none; border: 1px solid var(--border-subtle); padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+
+    /* Tab Display */
+    .page-tab { display: none; opacity: 0; transition: opacity 0.3s ease; flex: 1; }
+    .page-tab.active { display: block; opacity: 1; }
+
+    /* Hero */
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; padding: 64px 0 72px; }
+    .hero-name { font-size: 3.25rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin: 12px 0 6px; }
+    .hero-title { font-size: 1.35rem; font-weight: 500; color: var(--accent-primary); margin-bottom: 16px; }
+    .hero-intro {
+      font-size: 1.125rem; color: var(--text-secondary); line-height: 1.65; background: #fff;
+      padding: 16px 20px; border-left: 3px solid var(--accent-blue); border-radius: 0 6px 6px 0; margin-bottom: 16px;
+    }
+    .hero-tagline { font-size: 0.9375rem; color: var(--text-muted); font-style: italic; margin-bottom: 24px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+    .profile-frame {
+      position: relative; padding: 16px; background: #fff; border: 1px solid var(--border-medium);
+      border-radius: var(--radius-md); box-shadow: var(--shadow-lg); max-width: 360px; margin: 0 auto;
+    }
+    .profile-photo { width: 100%; aspect-ratio: 1/1.18; object-fit: cover; object-position: center 20%; border-radius: 4px; display: block; background: #0f172a; }
+    .highlights-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 0 0 60px; }
+    .stat-card { background: #fff; border: 1px solid var(--border-subtle); padding: 18px 20px; border-radius: var(--radius-md); }
+    .stat-label { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-light); text-transform: uppercase; }
+    .stat-value { font-size: 1.1875rem; font-weight: 700; color: var(--accent-primary); margin: 4px 0; }
+
+    /* Page Header */
+    .page-header { background: #fff; border-bottom: 1px solid var(--border-subtle); padding: 56px 0 36px; }
+    .page-title { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.02em; margin: 12px 0 8px; }
+    .page-desc { font-size: 1.0625rem; color: var(--text-secondary); max-width: 680px; }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 20px; max-width: 820px; }
+    .timeline-item { display: grid; grid-template-columns: 44px 1fr; gap: 20px; }
+    .timeline-node { width: 44px; height: 44px; border: 2px solid var(--accent-primary); background: #fff; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 700; color: var(--accent-primary); }
+    .timeline-content { padding: 22px; }
+
+    /* Grids */
+    .skills-grid, .projects-grid, .certs-grid { display: grid; gap: 20px; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .projects-grid, .certs-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+
+    /* Skill Card */
+    .skill-card { display: flex; flex-direction: column; gap: 12px; }
+    .skill-top { display: flex; justify-content: space-between; align-items: center; }
+    .skill-level-badge { font-family: var(--font-mono); font-weight: 700; color: var(--accent-primary); background: var(--bg-accent-subtle); padding: 3px 8px; border-radius: 4px; }
+    .progress-bar-track { width: 100%; height: 8px; background: var(--bg-subtle); border-radius: 99px; overflow: hidden; border: 1px solid var(--border-subtle); }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-blue)); border-radius: 99px; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* Contact */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+    .contact-item { display: flex; align-items: center; gap: 14px; padding: 18px; text-decoration: none; color: inherit; }
+    .contact-icon { width: 40px; height: 40px; border-radius: 6px; background: var(--bg-accent-subtle); color: var(--accent-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem; }
+
+    /* Footer */
+    .footer { background: #fff; border-top: 1px solid var(--border-subtle); padding: 40px 0 28px; margin-top: auto; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+
+    @media (max-width: 900px) {
+      .hero-grid, .contact-layout { grid-template-columns: 1fr; }
+      .highlights-grid { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: 1fr; }
+      .nav-links { overflow-x: auto; padding-bottom: 4px; }
+      .hero-name { font-size: 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Navbar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <div class="brand" onclick="showTab('home')">
+        <div class="brand-gear">⚙️</div>
+        <span>Pushkar Kumar</span>
+        <span class="brand-badge">ME • JECRC</span>
+      </div>
+
+      <ul class="nav-links">
+        <li><button class="nav-btn active" id="btn-home" onclick="showTab('home')">Home</button></li>
+        <li><button class="nav-btn" id="btn-about" onclick="showTab('about')">About Me</button></li>
+        <li><button class="nav-btn" id="btn-education" onclick="showTab('education')">Education</button></li>
+        <li><button class="nav-btn" id="btn-skills" onclick="showTab('skills')">Skills</button></li>
+        <li><button class="nav-btn" id="btn-projects" onclick="showTab('projects')">Projects</button></li>
+        <li><button class="nav-btn" id="btn-certifications" onclick="showTab('certifications')">Certifications/Achievements</button></li>
+        <li><button class="nav-btn" id="btn-contact" onclick="showTab('contact')">Contact</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ==================== 1. HOME ==================== -->
+  <main id="tab-home" class="page-tab active">
+    <div class="container">
+      <section class="hero-grid">
+        <div>
+          <div style="display:flex; gap:10px; align-items:center; margin-bottom: 12px; flex-wrap: wrap;">
+            <span class="tech-tag">First-Year Undergraduate</span>
+            <span class="status-badge">📍 JECRC University, Jaipur</span>
+          </div>
+
+          <h1 class="hero-name">Pushkar Kumar</h1>
+          <h2 class="hero-title">B.Tech Mechanical Engineering Student</h2>
+
+          <p class="hero-intro">
+            "I am a first-year Mechanical Engineering student at JECRC University, Jaipur, passionate about understanding engineering fundamentals, exploring technology, and developing practical hands-on skills."
+          </p>
+
+          <p class="hero-tagline">
+            ▸ Building solid foundations in mechanical principles, digital tools, and engineering problem-solving.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary" onclick="showTab('about')">Explore My Journey →</button>
+            <a href="./public/resume.pdf" download="Pushkar_Kumar_Resume.pdf" class="btn btn-secondary">📥 Download Resume</a>
+          </div>
+
+          <div style="font-family: var(--font-mono); font-size: 0.75rem; color: #10b981; margin-top: 14px;">
+            ● First-year undergraduate student • Class of 2030
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center;">
+          <div class="profile-frame">
+            <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.6875rem; color:var(--accent-blue); margin-bottom:8px;">
+              <span>REF: ME-2026</span>
+              <span>JAIPUR, INDIA</span>
+            </div>
+            <!-- Clean Profile Photo (Linked to public/profile.jpg) -->
+            <img src="./public/profile.jpg" alt="Pushkar Kumar" class="profile-photo" onerror="this.src='./public/favicon.svg'">
+            <div style="font-family:var(--font-mono); font-size:0.6875rem; color:var(--text-light); text-align:center; margin-top:8px;">
+              JECRC University • Mechanical Engineering
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Highlights Strip -->
+      <div class="highlights-grid">
+        <div class="stat-card">
+          <span class="stat-label">Current Status</span>
+          <div class="stat-value">First-Year</div>
+          <span style="font-size:0.8125rem; color:var(--text-muted);">Class of 2030</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Degree & Branch</span>
+          <div class="stat-value">B.Tech ME</div>
+          <span style="font-size:0.8125rem; color:var(--text-muted);">Mechanical Eng.</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">University</span>
+          <div class="stat-value">JECRC Univ.</div>
+          <span style="font-size:0.8125rem; color:var(--text-muted);">Jaipur, Rajasthan</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Focus Area</span>
+          <div class="stat-value">Foundations & Tech</div>
+          <span style="font-size:0.8125rem; color:var(--text-muted);">Skills & Practice</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== 2. ABOUT ME ==================== -->
+  <main id="tab-about" class="page-tab">
+    <div class="page-header">
+      <div class="container">
+        <span class="tech-tag">ABOUT ME</span>
+        <h1 class="page-title">My Story & Journey</h1>
+        <p class="page-desc">First-year Mechanical Engineering student at JECRC University, Jaipur, focused on learning engineering fundamentals, digital tools, and practical problem-solving.</p>
+      </div>
+    </div>
+
+    <div class="container section">
+      <div class="card-base" style="line-height: 1.7; color: var(--text-secondary); max-width: 860px;">
+        <h3 style="color:var(--text-primary); margin-bottom: 12px; font-size: 1.25rem;">Grounding in Fundamentals</h3>
+        <p style="margin-bottom: 16px;">
+          I am a first-year undergraduate student pursuing my Bachelor of Technology (B.Tech) in Mechanical Engineering at JECRC University, Jaipur, Rajasthan. I chose Mechanical Engineering because I have always had a natural interest in understanding how physical mechanisms work, how parts fit together, and how engineering shapes the real world.
+        </p>
+        <p style="margin-bottom: 16px;">
+          As a first-year student, I am in the early stage of my academic journey. My focus right now is on building solid foundational skills—grasping core scientific and engineering subjects, developing digital literacy, and getting comfortable with modern computer applications and AI tools.
+        </p>
+        <p style="margin-bottom: 16px;">
+          I believe in continuous learning and hands-on exposure. Beyond classroom lectures, I am working on practical personal projects, improving my communication and teamwork abilities, and preparing myself to tackle core mechanical subjects, CAD tools, and workshop fabrications as I advance through my degree towards 2030.
+        </p>
+        <p>
+          I look forward to collaborating with fellow students, participating in university technical clubs, and steadily transforming curiosity into practical engineering capability.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== 3. EDUCATION ==================== -->
+  <main id="tab-education" class="page-tab">
+    <div class="page-header">
+      <div class="container">
+        <span class="tech-tag">ACADEMIC PATHWAY</span>
+        <h1 class="page-title">Education</h1>
+        <p class="page-desc">Academic qualifications and current degree program at JECRC University, Jaipur.</p>
+      </div>
+    </div>
+
+    <div class="container section">
+      <div class="timeline">
+        <!-- JECRC University -->
+        <div class="timeline-item">
+          <div class="timeline-node">01</div>
+          <div class="card-base timeline-content">
+            <span class="status-badge" style="color:var(--accent-blue); margin-bottom:6px;">2026 – 2030 (Expected)</span>
+            <h3 style="font-size:1.15rem; margin-bottom:4px;">Bachelor of Technology (B.Tech) — Mechanical Engineering</h3>
+            <p style="font-size:0.9375rem; color:var(--accent-primary); font-weight:600; margin-bottom:8px;">JECRC University, Jaipur, Rajasthan • First Year</p>
+            <p style="font-size:0.875rem; margin-bottom: 10px;">
+              First-year engineering curriculum covering Engineering Mechanics, Basic Sciences, Applied Mathematics, Workshop Practice, and Computing Fundamentals.
+            </p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="status-badge">Engineering Mechanics</span>
+              <span class="status-badge">Workshop Practice</span>
+              <span class="status-badge">Applied Mathematics</span>
+              <span class="status-badge">Computing Basics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Class XII -->
+        <div class="timeline-item">
+          <div class="timeline-node">02</div>
+          <div class="card-base timeline-content">
+            <span class="status-badge" style="color:var(--accent-blue); margin-bottom:6px;">Completed</span>
+            <h3 style="font-size:1.15rem; margin-bottom:4px;">Senior Secondary (Class XII) — Science</h3>
+            <p style="font-size:0.9375rem; color:var(--text-muted); margin-bottom:8px;">[Your School Name] • Jaipur, Rajasthan</p>
+            <p style="font-size:0.875rem;">Senior secondary school certificate focusing on Physics, Chemistry, and Mathematics (PCM).</p>
+          </div>
+        </div>
+
+        <!-- Class X -->
+        <div class="timeline-item">
+          <div class="timeline-node">03</div>
+          <div class="card-base timeline-content">
+            <span class="status-badge" style="color:var(--accent-blue); margin-bottom:6px;">Completed</span>
+            <h3 style="font-size:1.15rem; margin-bottom:4px;">Secondary School Certificate (Class X)</h3>
+            <p style="font-size:0.9375rem; color:var(--text-muted); margin-bottom:8px;">[Your School Name] • Jaipur, Rajasthan</p>
+            <p style="font-size:0.875rem;">Secondary education covering General Science, Mathematics, and Computer Basics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== 4. SKILLS ==================== -->
+  <main id="tab-skills" class="page-tab">
+    <div class="page-header">
+      <div class="container">
+        <span class="tech-tag">FOUNDATIONAL CAPABILITIES</span>
+        <h1 class="page-title">Developing Skills</h1>
+        <p class="page-desc">Beginner-level and foundational digital, technical, and interpersonal skills currently in active development.</p>
+      </div>
+    </div>
+
+    <div class="container section">
+      <div class="skills-grid" style="margin-bottom: 36px;">
+        <!-- Skill 1 -->
+        <div class="card-base skill-card">
+          <div class="skill-top">
+            <div><strong>AI Tools & Prompt Writing</strong> <span class="status-badge">Developing</span></div>
+            <span class="skill-level-badge">65%</span>
+          </div>
+          <p style="font-size:0.875rem; color:var(--text-secondary);">Using AI assistants for conceptual research, academic study, and structured prompt drafting.</p>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 65%;"></div></div>
+        </div>
+
+        <!-- Skill 2 -->
+        <div class="card-base skill-card">
+          <div class="skill-top">
+            <div><strong>Digital Literacy</strong> <span class="status-badge">Foundational</span></div>
+            <span class="skill-level-badge">60%</span>
+          </div>
+          <p style="font-size:0.875rem; color:var(--text-secondary);">Navigating modern software platforms, cloud tools, technical web resources, and information retrieval.</p>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 60%;"></div></div>
+        </div>
+
+        <!-- Skill 3 -->
+        <div class="card-base skill-card">
+          <div class="skill-top">
+            <div><strong>MS Office (Word, PowerPoint, Excel)</strong> <span class="status-badge">Productivity</span></div>
+            <span class="skill-level-badge">70%</span>
+          </div>
+          <p style="font-size:0.875rem; color:var(--text-secondary);">Structuring engineering reports, creating course presentations, and managing tabular data.</p>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 70%;"></div></div>
+        </div>
+
+        <!-- Skill 4 -->
+        <div class="card-base skill-card">
+          <div class="skill-top">
+            <div><strong>Basic Computer Skills</strong> <span class="status-badge">Computing</span></div>
+            <span class="skill-level-badge">65%</span>
+          </div>
+          <p style="font-size:0.875rem; color:var(--text-secondary);">OS navigation, directory management, software installation, and fundamental computer usage.</p>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 65%;"></div></div>
+        </div>
+
+        <!-- Skill 5 -->
+        <div class="card-base skill-card">
+          <div class="skill-top">
+            <div><strong>Communication & Teamwork</strong> <span class="status-badge">Interpersonal</span></div>
+            <span class="skill-level-badge">75%</span>
+          </div>
+          <p style="font-size:0.875rem; color:var(--text-secondary);">Collaborating with classmates on university tasks, active listening, and participating in team activities.</p>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width: 75%;"></div></div>
+        </div>
+      </div>
+
+      <div class="card-base" style="background:var(--bg-accent-subtle); border-color:var(--accent-light);">
+        <strong style="color:var(--accent-primary);">📌 Note on Proficiency:</strong>
+        <p style="font-size:0.84375rem; color:var(--text-secondary); margin-top:4px;">
+          These represent foundational and developing skills for a first-year student, not professional expert claims. Core engineering tools (AutoCAD, 3D modeling, coding) will be expanded as semester practicals progress.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== 5. PROJECTS ==================== -->
+  <main id="tab-projects" class="page-tab">
+    <div class="page-header">
+      <div class="container">
+        <span class="tech-tag">ACADEMIC & PRACTICAL</span>
+        <h1 class="page-title">Projects</h1>
+        <p class="page-desc">Academic and personal technical projects undertaken as a first-year Mechanical Engineering student.</p>
+      </div>
+    </div>
+
+    <div class="container section">
+      <div class="projects-grid">
+        <!-- Project 1: Portfolio -->
+        <div class="card-base" style="display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="status-badge">Web & Digital</span>
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-light);">2026</span>
+            </div>
+            <h3 style="font-size:1.15rem; margin-bottom:8px;">Personal Portfolio Website</h3>
+            <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:12px;">
+              Designed and built a clean, minimal personal website to document my academic coursework, learning progress, developing skills, and engineering projects at JECRC University.
+            </p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="tech-tag" style="font-size:0.68rem;">React</span>
+              <span class="tech-tag" style="font-size:0.68rem;">Vite</span>
+              <span class="tech-tag" style="font-size:0.68rem;">CSS</span>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <span class="status-badge" style="background:#ecfdf5; color:#065f46; border-color:#a7f3d0;">✓ Completed</span>
+          </div>
+        </div>
+
+        <!-- Project 2: Upcoming Lab Projects -->
+        <div class="card-base" style="display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="status-badge">Mechanical Labs</span>
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-light);">2026 – 2027</span>
+            </div>
+            <h3 style="font-size:1.15rem; margin-bottom:8px;">Coursework & Workshop Projects</h3>
+            <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:12px;">
+              Space reserved for upcoming semester laboratory practicals, machine workshop assignments, and first-year mechanical design projects at JECRC University.
+            </p>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="tech-tag" style="font-size:0.68rem;">Workshop Practice</span>
+              <span class="tech-tag" style="font-size:0.68rem;">Mechanics</span>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:flex-end;">
+            <span class="status-badge" style="background:#eff6ff; color:#1e40af; border-color:#bfdbfe;">⏳ In Progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== 6. CERTIFICATIONS / ACHIEVEMENTS ==================== -->
+  <main id="tab-certifications" class="page-tab">
+    <div class="page-header">
+      <div class="container">
+        <span class="tech-tag">CREDENTIALS // MILESTONES</span>
+        <h1 class="page-title">Certifications & Achievements</h1>
+        <p class="page-desc">Dedicated section for verified certifications and academic milestones (to be updated as completed).</p>
+      </div>
+    </div>
+
+    <div class="container section">
+      <h2 style="font-size:1.35rem; margin-bottom:16px;">Certifications in Progress</h2>
+      <div class="certs-grid" style="margin-bottom: 40px;">
+        <div class="card-base">
+          <span class="status-badge">In Progress • 2026</span>
+          <h4 style="margin:8px 0 4px;">Foundational Digital & AI Tools Learning</h4>
+          <p style="font-size:0.8125rem; color:var(--accent-primary); margin-bottom:8px;">Self-Paced Learning</p>
+          <p style="font-size:0.84375rem; color:var(--text-secondary);">Currently undertaking self-directed modules in modern digital tools, prompt writing, and computer fundamentals.</p>
+        </div>
+
+        <div class="card-base">
+          <span class="status-badge">Upcoming</span>
+          <h4 style="margin:8px 0 4px;">Upcoming Engineering Certifications</h4>
+          <p style="font-size:0.8125rem; color:var(--accent-primary); margin-bottom:8px;">JECRC University / Online</p>
+          <p style="font-size:0.84375rem; color:var(--text-secondary);">Planned certifications in 2D drafting, computer tools, and workshop practices as degree progresses.</p>
+        </div>
+      </div>
+
+      <h2 style="font-size:1.35rem; margin-bottom:16px;">Academic & Campus Milestones</h2>
+      <div class="certs-grid">
+        <div class="card-base">
+          <span class="status-badge">Academic • 2026</span>
+          <h4 style="margin:8px 0 4px;">Admission to B.Tech Mechanical Engineering</h4>
+          <p style="font-size:0.84375rem; color:var(--text-secondary);">Enrolled in Bachelor of Technology (Mechanical Engineering) at JECRC University, Jaipur.</p>
+        </div>
+        <div class="card-base">
+          <span class="status-badge">Digital Milestone • 2026</span>
+          <h4 style="margin:8px 0 4px;">Built Personal Engineering Portfolio</h4>
+          <p style="font-size:0.84375rem; color:var(--text-secondary);">Created a modern personal web platform to record academic milestones and learning progression.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== 7. CONTACT ==================== -->
+  <main id="tab-contact" class="page-tab">
+    <div class="page-header">
+      <div class="container">
+        <span class="tech-tag">COMMUNICATION</span>
+        <h1 class="page-title">Let's Connect</h1>
+        <p class="page-desc">"I am always open to connecting, learning, collaborating, and discussing new engineering ideas."</p>
+      </div>
+    </div>
+
+    <div class="container section">
+      <div class="contact-layout">
+        <!-- Direct Verified Channels -->
+        <div style="display:flex; flex-direction:column; gap:14px;">
+          <div class="card-base contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.6875rem; color:var(--text-light);">CAMPUS / LOCATION</div>
+              <strong>JECRC University, Jaipur, Rajasthan, India</strong>
+            </div>
+          </div>
+
+          <a href="mailto:pushkarchauhan82@gmail.com" class="card-base contact-item" style="cursor:pointer;">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.6875rem; color:var(--text-light);">EMAIL ADDRESS</div>
+              <strong>pushkarchauhan82@gmail.com</strong>
+            </div>
+          </a>
+
+          <a href="tel:6377067475" class="card-base contact-item" style="cursor:pointer;">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.6875rem; color:var(--text-light);">PHONE NUMBER</div>
+              <strong>+91 63770 67475</strong>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/pushkar-chauhan-0a4720433?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener noreferrer" class="card-base contact-item" style="cursor:pointer;">
+            <div class="contact-icon">💼</div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.6875rem; color:var(--text-light);">LINKEDIN PROFILE</div>
+              <strong>Pushkar Chauhan</strong>
+            </div>
+          </a>
+
+          <a href="https://github.com/pushkarchauhan826-wq" target="_blank" rel="noopener noreferrer" class="card-base contact-item" style="cursor:pointer;">
+            <div class="contact-icon">🐙</div>
+            <div>
+              <div style="font-family:var(--font-mono); font-size:0.6875rem; color:var(--text-light);">GITHUB PROFILE</div>
+              <strong>pushkarchauhan826-wq</strong>
+            </div>
+          </a>
+        </div>
+
+        <!-- Quick Message Composer -->
+        <div class="card-base" style="padding: 32px;">
+          <span class="tech-tag" style="margin-bottom: 12px;">DIRECT INQUIRY</span>
+          <h3 style="margin-bottom: 6px;">Collaborate or Connect</h3>
+          <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom: 20px;">
+            Pre-fills an email draft directly to <strong>pushkarchauhan82@gmail.com</strong> using your default mail app.
+          </p>
+
+          <form onsubmit="handleSendEmail(event)" style="display:flex; flex-direction:column; gap:14px;">
+            <input type="text" id="msg-name" placeholder="Your Name" required style="padding:10px 14px; border:1px solid var(--border-subtle); border-radius:6px; font-family:inherit;">
+            <input type="email" id="msg-email" placeholder="Your Email" required style="padding:10px 14px; border:1px solid var(--border-subtle); border-radius:6px; font-family:inherit;">
+            <input type="text" id="msg-subject" placeholder="Subject (e.g. Project Discussion)" required style="padding:10px 14px; border:1px solid var(--border-subtle); border-radius:6px; font-family:inherit;">
+            <textarea id="msg-text" rows="4" placeholder="Your message..." required style="padding:10px 14px; border:1px solid var(--border-subtle); border-radius:6px; font-family:inherit;"></textarea>
+            <button type="submit" class="btn btn-primary" style="margin-top:6px;">Send Message ✉️</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>© 2026 Pushkar Kumar</strong>
+        <div style="font-size:0.8125rem; color:var(--text-muted);">B.Tech Mechanical Engineering • JECRC University, Jaipur</div>
+      </div>
+      <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-light);">
+        STATUS: FIRST-YEAR UNDERGRADUATE // CLASS OF 2030
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.page-tab').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      
+      const target = document.getElementById('tab-' + tabId);
+      const btn = document.getElementById('btn-' + tabId);
+      if (target) target.classList.add('active');
+      if (btn) btn.classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function handleSendEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById('msg-name').value;
+      const email = document.getElementById('msg-email').value;
+      const subject = document.getElementById('msg-subject').value;
+      const text = document.getElementById('msg-text').value;
+
+      const mailto = `mailto:pushkarchauhan82@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + text)}`;
+      window.location.href = mailto;
+    }
+  </script>
+</body>
+</html>
